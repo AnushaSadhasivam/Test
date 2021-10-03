@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Blog page</title>
+
+
+
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--font class-->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital@1&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+  <div class="social-media-wrapper">
+    <div class="icons-wrapper">
+      <ul>
+        <a href="https://www.facebook.com/" class="fa fa-facebook" target="_blank" aria-label="facebook"></a>
+
+        <a href="https://twitter.com/" class="fa fa-twitter" target="_blank" aria-label="twitter"></a>
+        <a href="https://www.youtube.com/" class="fa fa-youtube" target="_blank" aria-label="youtube"></a>
+        <a href="https://www.instagram.com/" class="fa fa-instagram" target="_blank" aria-label="instagram"></a>
+        <a href="https://www.linkedin.com/" class="fa fa-linkedin" target="_blank" aria-label="linkedin"></a>
+
+      </ul>
+    </div>
+  </div>
+  <div class="sticky">
+    <a href="/Assignment/Test/Index.html" title="Skip to the home page" rel="Index"
+      class="float-left site-logo logo-svg">
+      <img class="img-src" src="../images/company-logo.png" alt="Skip to the home page">
+    </a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light float-right">
+      <div class="container-fluid">
+       
+
+
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/Assignment/Test/contact.html">Contact</a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="#">
+                Blog
+              </a>
+
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+</head>
+
+<body class="container" id="main">
+
+  <div class="container">
+    <h5>29.09.2021 / Andrew Tan / <a href="../blog.html">PHP </a> </h5>
+    <h1 class="node__title blog-post__title">
+      How a PHP interpreter works.
+    </h1>
+
+    <figure class="figure">
+      <img src="../images/phpinterpreterlarge.jpeg" class="figure-img img-fluid rounded" alt="...">
+
+    </figure>
+  </div>
+  ,<section>
+    <p class="text-align-justify">PHP, as is the case with many other languages used for web applications, is an
+      interpreted language. When running an application written in PHP, we usually don’t think what really happens to
+      its code during the execution. In this article you will learn how the finished code is processed by a PHP
+      interpreter.</p>
+    <h2 class="text-align-justify">Compilation and interpretation</h2>
+    <p class="text-align-justify">Compiled languages, such as, for example, C, C++, differ from interpreted languages
+      due to the fact that their processing into machine code is performed only once. After the compilation process, you
+      can run the application many times without the need for another compilation. Once the application is compiled,
+      there is no additional time overhead for its subsequent processing, but its development process is also more
+      difficult (changes require recompilation). Alternatively, we have interpreted languages, such as PHP, Python and
+      Ruby. They are less efficient as their code is processed by a separate application (an interpreter) that
+      translates the application code "on the fly". Such a strategy means lower performance and application execution
+      time, but on the other hand – it allows for greater flexibility and ease of software development. So, let us take
+      a closer look at how a PHP interpreter works.</p>
+  </section>
+  <h2 class="text-align-justify">Zend Engine</h2>
+  <p class="text-align-justify"><a href="https://www.zend.com/" target="_blank">Zend Engine</a> is both the engine and
+    the very heart of the PHP language. It consists of a source code to bytecode compiler and a virtual machine that
+    executes this code. It is comes directly with PHP – when you install PHP, you install Zend Engine at the same time.
+    It is responsible for the whole code processing, from the moment your HTTP server sends the requested PHP script
+    execution to it, until the HTML code is generated and returned to the server. To put it simply, the whole processing
+    of a PHP script is carried out by the interpreter in four stages:</p>
+  <ul>
+    <li class="text-align-justify">lexical analysis (lexing),</li>
+    <li class="text-align-justify">syntax analysis (parsing),</li>
+    <li class="text-align-justify">compilation,</li>
+    <li class="text-align-justify">execution.</li>
+  </ul>
+  <p class="text-align-justify">With the introduction of the OPcache mechanism, the whole process can be basically
+    skipped until the last step - launching/executing the application on a virtual machine. The situation becomes even
+    more comfortable if you know what's new in
+    PHP version 8. I mean of course the JIT compiler that allows you to compile PHP code. As a result, it is possible to
+    run the
+    machine code directly - bypassing the process of interpretation or execution by a virtual machine.</p>
+  <p class="text-align-justify">I would like to add that in the past there was another curious option - code
+    transpilation, e.g., into the C++ language. Such a solution was used in HipHop for PHP created by the Facebook
+    programmers, that is not being developed anymore. At a later stage, however, the transpilation was replaced by the
+    HHVM (HipHop Virtual Machine) project based on just-in-time (JIT) compilation.</p>
+  <h2 class="text-align-justify">Lexical analysis (Lexing)</h2>
+  <p class="text-align-justify">Sometimes also called tokenizing, it is a phase that literally consists of converting a
+    string of characters from the source code written in PHP into a sequence of tokens that describe what each
+    subsequent encountered value means. The set of tokens generated in this way helps the interpreter with processing
+    the code further.</p>
+  <p class="text-align-justify">Interestingly, the lexer not only handles the processing of the code into tokens, but it
+    also stores the information about the value stored by the tokens, as well as about the reference to the specific
+    line in which it was intercepted. This is used, among other things, to generate a stack trace of an application.
+    Syntax analysis (parsing) This is another process consisting, like lexing, of processing the generated tokens into a
+    more ordered and organised data structure. As with lexing, PHP uses here on an external tool called <a
+      href="https://www.gnu.org/software/bison/" target="_blank">GNU Bison</a> based on the <a
+      href="https://github.com/php/php-src/blob/master/Zend/zend_language_parser.y" target="_blank">BNF</a> file
+    containing the grammar of the language. It allows you to convert a context-free grammar into a more useful,
+    cause-and-effect one. The LALR(1) method is used for conversion, which reads the input with a preview of n tokens
+    forward (in the case of PHP 1) from left to right and produces a right-hand output. Through this process, the parser
+    is able to match tokens to the grammar rules defined in the BNF file. In the process of matching tokens, it is
+    validated whether the tokens form the correct syntax constructs.</p>
+  <h2 class="text-align-justify">Compilation</h2>
+  <p class="text-align-justify">Without the use of JIT, PHP in its standard form is compiled from the generated AST to
+    OPCode, not – as is the case with JIT – into machine code. The compilation process is carried out by recursively
+    traversing the AST, as part of which some optimisations are made as well. Most often, simple arithmetic calculations
+    are performed, or the expressions such as <em>strlen("test")</em>&nbsp;are replaced with a direct <em>int(4)</em>
+    value.</p>
+  <h2 class="text-align-justify">Execution</h2>
+  <p class="text-align-justify">This is the last phase of the interpretation process. At this stage, you actually run
+    the generated OPCode on the Zend virtual machine (Zend Engine VM). The end result is what a given script was
+    supposed to generate, i.e. the same as the output of commands such as <em>echo</em> or <em>print</em>. From the
+    point of view of web applications, it is usually a ready source code for a website.</p>
+  <h2 class="text-align-justify">Summary</h2>
+  <p class="text-align-justify">Most of us do not think about how the PHP code is actually analysed and run on a server
+    – especially when we entrust 
+      server and application monitoring</a> to external service providers. Nevertheless, it is good to
+    understand what really happens to the code of your application when it is transferred to an interpreter. Such
+    knowledge can help with both the security and performance analysis of a project developed in PHP.</p>
+  
+  <section>
+
+    <div class="container my-5 py-5" style=background-color:#3949AB>
+        <h2>Need a team of development
+            experts?</h2>
+        <button type="button" class="btn btn-primary"
+            onclick="window.location.href='/Assignment/Test/contact.html'">
+            Click here
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path
+                    d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.218 19l-1.782-1.75 5.25-5.25-5.25-5.25 1.782-1.75 6.968 7-6.968 7z" />
+            </svg>
+
+        </button>
+    </div>
+
+
+
+</section>
+
+
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"
+    lang="Javascript" type="text/javascript">
+
+    </script>
+</body>
+
+</html>
